@@ -1,0 +1,30 @@
+//import des bibliothéques spécifiques aux capteur DHT
+
+#include <DHT.h>
+
+#define DHTPIN 2 //definition du port de branchement du capteur 
+#define DHTTYPE DHT22 //definition du type de capteur 
+
+DHT dht(DHTPIN, DHTTYPE);
+void setup() {
+  // put your setup code here, to run once:
+
+  Serial.begin(9600);
+  dht.begin();
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  delay (1000);
+
+  float humidite = dht.readHumidity(); //lecture de l'humidité 
+  float temperature = dht.readTemperature(); //lecture de la température 
+
+
+  Serial.print("humidite : ");
+  Serial.print(humidite);
+  Serial.print(" Temperature: ");
+  Serial.println(temperature);
+
+}
