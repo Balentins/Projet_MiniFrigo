@@ -32,18 +32,11 @@ public class View {
 		field.setColumns(10);
 		button = new JButton("OK");
 		combo = new JComboBox<String>();
-		for(int i=10; i<=20; i++)   
-        {
-        String I=""+i;
-        combo.addItem(I);
-        }
-
+		
 		
 		frame.setLayout(new FlowLayout());
 		frame.getContentPane().add(field);
 		frame.getContentPane().add(button);
-		frame.getContentPane().add(combo);
-		
 		
 		frame.setVisible(true);
 		frame.pack();
