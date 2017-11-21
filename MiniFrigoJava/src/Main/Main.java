@@ -7,13 +7,12 @@ import View.View;
 public class Main {
 	
 	public static void main(String[] args){
-
+		View view = new View();
+		view.init();
 		
 		Model model = new Model();
 		
-		Controller c = new Controller(model, view);
-		View view = new View(model,c);
-		view.init();
+		Controller c = new Controller(model, view.getField());
 		view.getButton().addActionListener(c);
 		
 	}

@@ -11,6 +11,7 @@ public class Controller implements ActionListener {
 	
 	Model m;
 	JTextField field;
+	
 	public Controller(Model m, JTextField field){
 		this.m=m;
 		this.field = field;
@@ -21,12 +22,7 @@ public class Controller implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		
 		m.setValeur(field.getText());
-			
+
 	}
-	public void gestionCond()
-	{
-		m.Condensation();
-	}
-	
 
 }
