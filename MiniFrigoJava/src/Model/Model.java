@@ -2,15 +2,30 @@ package Model;
 
 public class Model {
 	
-	String valeur;
-
-	public String getValeur() {
-		return valeur;
+	String condensation;
+	
+	
+	public String getCondensation() {
+		return condensation;
 	}
 
-	public void setValeur(String valeur) {
-		this.valeur = valeur;
-		System.out.println(valeur);
+	public void setCondensation(String condensation) {
+		this.condensation = condensation;
 	}
+	
+	public  void Condensation()
+    {
+        int ACond=10;
+        if (ACond <= 25)
+        {
+            this.condensation = "0";
+        }
+
+        else 
+        {
+            this.condensation = "1";
+        }
+
+    }
 
 }

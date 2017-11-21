@@ -1,6 +1,9 @@
 package View;
 
 import java.awt.FlowLayout;
+import java.awt.Label;
+import Main.Main;
+import Model.Model;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -8,44 +11,48 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 public class View {
-	JFrame frame;
-	JTextField field;
-	JButton button;
+	JFrame frame; //fenetre
 	JComboBox<String> combo;
+	Label alerteCond;
+	Model m;
 	
-	public JFrame getFrame() {
+	
+	public Label getAlerteCond() {
+		return alerteCond;
+	}
+
+
+	public JFrame getFrame() 
+	{
 		return frame;
 	}
-	public JTextField getField() {
-		return field;
-	}
-	public JButton getButton() {
-		return button;
-	}
-	public JComboBox<String> getComboBox() {
+	
+	
+	public JComboBox<String> getComboBox() 
+	{
 		return combo;
 	}
 	
-	public void init(){
-		frame = new JFrame ("Exemple POO");
-		field = new JTextField();
-		field.setColumns(10);
-		button = new JButton("OK");
-		combo = new JComboBox<String>();
-		for(int i=10; i<=20; i++)   
+	
+	
+	public void init(){ // initialise la vue
+		frame = new JFrame ("Exemple POO"); //objet de la fenetre
+		combo = new JComboBox<String>(); // menu déroulant
+		alerteCond = new Label("le taux de condensation atteint une limite critique");//étiquette alerte condensation
+		
+		for(int i=10; i<=20; i++) // incrémentattion des cases de la liste
         {
         String I=""+i;
         combo.addItem(I);
         }
-
 		
-		frame.setLayout(new FlowLayout());
-		frame.getContentPane().add(field);
-		frame.getContentPane().add(button);
-		frame.getContentPane().add(combo);
-		
-		
-		frame.setVisible(true);
-		frame.pack();
+		frame.getContentPane().add(combo);//affiche le menu déroulant
+		if (m.getCondensation() == "1")//affiche l'alerte si necessaire
+        	{
+			frame.getContentPane().add(alerteCond);
+        	}
+		frame.setLayout(new FlowLayout()); //donne l'aspect voulu à la fenetre
+		frame.setVisible(true); //rend visble la fentre
+		frame.pack();//taille de la fenetre en s'ajustant aux composants de l'interface
 	}
 }

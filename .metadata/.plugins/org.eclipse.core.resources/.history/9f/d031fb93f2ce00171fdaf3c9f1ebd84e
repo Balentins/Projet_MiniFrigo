@@ -1,0 +1,51 @@
+package View;
+
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+public class View {
+	JFrame frame; //fenetre
+	JTextField field;// saisie de texte
+	JButton button;// bouton
+	JComboBox<String> combo;
+	
+	public JFrame getFrame() {
+		return frame;
+	}
+	public JTextField getField() {
+		return field;
+	}
+	public JButton getButton() {
+		return button;
+	}
+	public JComboBox<String> getComboBox() {
+		return combo;
+	}
+	
+	public void init(){ // initialise la vue
+		frame = new JFrame ("Exemple POO"); //objet de la fenetre
+		field = new JTextField(); 
+		field.setColumns(10); // largeur du champs
+		button = new JButton("OK"); // texte du bouton
+		combo = new JComboBox<String>(); // menu déroulant
+		for(int i=10; i<=20; i++) // incrémentattion des cases de la liste
+        {
+        String I=""+i;
+        combo.addItem(I);
+        }
+
+		
+		frame.setLayout(new FlowLayout()); //redimentionne la fenetre avec les paramettre voulu
+		frame.getContentPane().add(field);// ajoout dans la fenetre
+		frame.getContentPane().add(button);
+		frame.getContentPane().add(combo);
+		
+		
+		frame.setVisible(true);
+		frame.pack();
+	}
+}

@@ -1,0 +1,30 @@
+package Controller;
+
+import gnu.io.*;
+import java.util.Enumeration;
+
+public class CommPort {
+	
+	public void TrouverPort() 
+	{
+
+		CommPortIdentifier serialPortId;
+
+		Enumeration enumComm;
+
+		enumComm = CommPortIdentifier.getPortIdentifiers();
+
+		while(enumComm.hasMoreElements())
+		{
+		serialPortId = (CommPortIdentifier)enumComm.nextElement();
+		if(serialPortId.getPortType() == CommPortIdentifier.PORT_SERIAL)
+			{
+			System.out.println(serialPortId.getName());
+			}
+		}
+
+		System.out.println("Program Finished Sucessfully");
+	}
+
+}
+
