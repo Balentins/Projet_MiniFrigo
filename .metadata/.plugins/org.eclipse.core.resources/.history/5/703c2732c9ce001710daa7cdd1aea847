@@ -1,0 +1,31 @@
+package Model;
+
+public class Model {
+	
+	String valeur;
+
+
+	public String getValeur() {
+		return valeur;
+	}
+
+	public void setValeur(String valeur) 
+	{
+		this.valeur = valeur;
+		System.out.println(valeur);
+	}
+	public boolean Condensation(boolean Cond)
+	{
+		int ACond=30;
+		if (ACond <= 25)
+		{
+			Cond = false;
+		}
+		else 
+		{
+			Cond=true;
+		}
+	return (boolean)(Cond);
+	}
+
+}
