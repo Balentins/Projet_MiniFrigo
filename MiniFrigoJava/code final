@@ -61,9 +61,9 @@ char option;
   if (Serial.available()> 0) 
   {
    option = Serial.read();
-   if(option == 'a')
+   if(option == '+')
    power += 5;
-   else if(option == 'z')
+   else if(option == '-')
    power -= 5;
    if (power > 99) power = 99; 
    if (power < 0) power = 0;
@@ -73,21 +73,21 @@ char option;
   analogWrite(peltier, peltier_level);
 
 //calcul du point de rosée 
-float alpha = (237,7 * temperature)/(17,7 + temperature) + log(humidite);
-float ptrosee = (237,7 * alpha)/(17,7 - alpha);
+float alpha = (17,27 * temperature)/(237,7 + temperature) + log(humidite/100);
+float ptrosee = (237,7 * alpha)/(17,27 - alpha);
   
   Serial.print("Ohm  -  T exterieure = ");
   Serial.print(celsius);
   Serial.println(" C\n");
   Serial.print("humidite : ");
-  Serial.print(humidite);
+  Serial.println(humidite);
   Serial.print(" Temperature interieure: ");
-  Serial.print(temperature);
+  Serial.println(temperature);
   Serial.print(" power = ");
-  Serial.print(power);
+  Serial.println(power);
   Serial.print(" PLevel = ");
-  Serial.print(peltier_level);
+  Serial.println(peltier_level);
   Serial.print(" pt rosee = ");
   Serial.println(ptrosee);
-  delay(1000);
+  delay(3000);
 }
