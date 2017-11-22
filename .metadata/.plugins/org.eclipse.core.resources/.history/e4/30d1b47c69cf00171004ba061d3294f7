@@ -3,18 +3,7 @@ package Model;
 public class Model {
 	
 	String condensation;
-	String temperature;
 	
-	public String getTemperature() {
-		return temperature;
-	}
-
-
-	public void setTemperature(String temperature) {
-		this.temperature = temperature;
-	}
-
-
 	public Model ()
 	{
 		Condensation();
@@ -47,15 +36,15 @@ public class Model {
 	
 	public  void Temperature()
     {
-        int ATemp=30;
-        if (ATemp <= 25)
+        int ACond=3;
+        if (ACond <= 25)
         {
-            this.temperature = "0";
+            this.condensation = "0";
         }
 
         else 
         {
-            this.temperature = "1";
+            this.condensation = "1";
         }
 
     }

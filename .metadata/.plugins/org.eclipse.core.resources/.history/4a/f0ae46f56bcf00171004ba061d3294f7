@@ -32,7 +32,7 @@ public class Model {
 	
 	public  void Condensation()
     {
-        int ACond=30;
+        int ACond=3;
         if (ACond <= 25)
         {
             this.condensation = "0";

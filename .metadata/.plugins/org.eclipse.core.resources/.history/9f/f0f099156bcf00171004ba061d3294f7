@@ -15,12 +15,7 @@ public class View {
 	JComboBox<String> combo;
 	Label alerteCond;
 	Model m;
-	Label alerteTemp;
 	
-	public Label getAlerteTemp() {
-		return alerteTemp;
-	}
-
 	public View(Model model)
 	{
 		this.m = model;
@@ -48,7 +43,7 @@ public class View {
 		frame = new JFrame ("Exemple POO"); //objet de la fenetre
 		combo = new JComboBox<String>(); // menu déroulant
 		alerteCond = new Label("le taux de condensation atteint une limite critique");//étiquette alerte condensation
-		alerteTemp = new Label("la temperature est anormal");
+		
 		for(int i=10; i<=20; i++) // incrémentattion des cases de la liste
         {
         String I=""+i;
@@ -60,10 +55,6 @@ public class View {
         	{
 			frame.getContentPane().add(alerteCond);
         	}
-		if (m.getTemperature() == "1")//affiche l'alerte si necessaire
-    	{
-		frame.getContentPane().add(alerteTemp);
-    	}
 		frame.setLayout(new FlowLayout()); //donne l'aspect voulu à la fenetre
 		frame.setVisible(true); //rend visble la fentre
 		frame.pack();//taille de la fenetre en s'ajustant aux composants de l'interface

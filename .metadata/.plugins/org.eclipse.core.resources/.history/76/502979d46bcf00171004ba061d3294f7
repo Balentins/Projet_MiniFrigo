@@ -13,7 +13,7 @@ public class Main {
 		View view = new View(model);//instance de la vue
 		view.init(); // lance la fonction qui initialise la vue
 		
-		Controller c = new Controller(model, view.getAlerteCond(), view.getAlerteTemp());
+		Controller c = new Controller(model, view.getAlerteCond());
 		//view.getAlerteCond().addComponentListener((ComponentListener) c);
 		
 	}

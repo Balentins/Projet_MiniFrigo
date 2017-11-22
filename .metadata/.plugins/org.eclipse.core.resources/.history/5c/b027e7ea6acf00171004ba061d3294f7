@@ -8,22 +8,19 @@ import Model.Model;
 
 public class Controller implements ActionListener {
 	
-	public Controller(Model m, Label alerteCond, Label alerteTemp)
+	public Controller(Model m, Label alerteCond)
 	{
 		this.m=m;
 		this.alerteCond=alerteCond;
-		this.alerteTemp=alerteTemp;
 	}
 
 	Model m;
 	Label alerteCond;
-	Label alerteTemp;
 	
 	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
+	public void actionPerformed(ActionEvent e) {
 		m.setCondensation(alerteCond.getText());
-		m.setTemperature(alerteTemp.getText());
+
 	}
-	
+
 }
