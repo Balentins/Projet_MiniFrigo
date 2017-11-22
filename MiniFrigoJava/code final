@@ -1,0 +1,93 @@
+#include <math.h>
+#include <DHT.h>
+#define DHTPIN 2 //definition du port de branchement du capteur 
+#define DHTTYPE DHT22 //definition du type de capteur 
+#define PIN 0
+
+DHT dht(DHTPIN, DHTTYPE);
+
+//definition des variables pour moduler l'effet peltier 
+int peltier = 5;
+int power = 0;
+int peltier_level = map(power, 0, 99, 0, 255);
+double Rref = 10000.0; //resistance à 25°C (excel)
+double V_IN = 5.0; //Alimentation d'entrée
+
+//Information de la thermistance
+double A_1 = 3.354016E-3;
+double B_1 = 2.569850E-4;
+double D_1 = 6.383091E-8;
+
+double SteinhartHart(double R)
+{
+  //Division de l'équation en 3 parties. La premiere est 
+  //uniquement A1
+  double equationB1 = B_1 * log(R/Rref);
+  double equationD1 = D_1 * pow(log(R/Rref), 3);
+  double equation = A_1 + equationB1 + equationD1;
+  return pow(equation, -1);
+
+}
+
+//definition des constantes pour calculer le points de rosée 
+const double a = 17.27;
+const double b = 237.7;
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+}
+
+void loop() {
+char option;
+  //Calcul de la tension sur la borne analogique
+  double valeurAnalog = analogRead(PIN);
+  double V =  valeurAnalog / 1024 * V_IN;
+
+  //Calcul de la résistance de la thermistance
+  double Rth = (Rref * V ) / (V_IN - V);
+  Serial.print("Rth = ");
+  Serial.print(Rth);
+
+  //Calcul de la température en kelvin( Steinhart and Hart)
+  double kelvin = SteinhartHart(Rth);
+  double celsius = kelvin - 273.15; //Conversion en celsius
+
+  //lecture des valeurs obtenue par le capteur DHT22
+  float humidite = dht.readHumidity(); //lecture de l'humidité 
+  float temperature = dht.readTemperature(); //lecture de la température 
+
+  //modulation de l'effet peltier 
+  if (Serial.available()> 0) 
+  {
+   option = Serial.read();
+   if(option == 'a')
+   power += 5;
+   else if(option == 'z')
+   power -= 5;
+   if (power > 99) power = 99; 
+   if (power < 0) power = 0;
+   peltier_level = map(power, 0, 99, 0, 255);
+   
+   }
+  analogWrite(peltier, peltier_level);
+
+//calcul du point de rosée 
+float alpha = (237,7 * temperature)/(17,7 + temperature) + log(humidite);
+float ptrosee = (237,7 * alpha)/(17,7 - alpha);
+  
+  Serial.print("Ohm  -  T exterieure = ");
+  Serial.print(celsius);
+  Serial.println(" C\n");
+  Serial.print("humidite : ");
+  Serial.print(humidite);
+  Serial.print(" Temperature interieure: ");
+  Serial.print(temperature);
+  Serial.print(" power = ");
+  Serial.print(power);
+  Serial.print(" PLevel = ");
+  Serial.print(peltier_level);
+  Serial.print(" pt rosee = ");
+  Serial.println(ptrosee);
+  delay(1000);
+}
