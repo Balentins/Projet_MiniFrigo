@@ -1,0 +1,49 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+ 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.chart.plot.PlotOrientation;
+ 
+public class humidite {
+        static DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+ 
+public static void main(String[] args) {
+ 
+// create a dataset...
+    XYSeries series = new XYSeries("humidité");
+    series.add(0.0, 30.0);
+    series.add(5.0, 35.0);
+    series.add(10.0, 42.0);
+    series.add(15.0, 43.0);
+    series.add(20.0, 46.0);
+    series.add(25.0, 50.0);
+    series.add(30.0, 56.0);
+    series.add(35.0, 64.0);
+    
+    XYDataset xyDataset = new XYSeriesCollection(series);
+ 
+// create a line chart...
+     JFreeChart chart = ChartFactory.createXYLineChart(
+     "",  // Title
+     "Temps (min)",           // X-Axis label
+     "humidité (%)",           // Y-Axis label
+     xyDataset,          // Dataset
+     PlotOrientation.VERTICAL,
+     true,
+     true,
+     false);
+ 
+     ChartFrame frame1=new ChartFrame("XYArea Chart",chart);
+     frame1.setVisible(true);
+     frame1.setSize(300,300);
+ 
+// create dot chart
+ 
+}
+
+}
